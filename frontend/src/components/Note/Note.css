@@ -1,0 +1,47 @@
+.notes__card {
+    background-color: white;
+    padding: 20px;
+    max-width: 450px;
+    width: 100%;
+    color: black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.notes__cardTitle {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.notes__cardDesc {
+    color: grey;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.notes__buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.notes__button {
+    text-transform: uppercase;
+    font-size: 16px;
+    color: white;
+    padding: 8px 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+.notes__button--edit {
+    background-color: rgb(60, 127, 228);
+}
+
+.notes__button--delete {
+    background-color: rgb(185, 56, 16);
+}

@@ -19,7 +19,7 @@ router.get("/notes/:id", noteActions.getNote);
 router.post("/notes", noteActions.saveNote);
 
 //put - edycja danych
-router.put("/notes:id", noteActions.updateNote);
+router.put("/notes/:id", noteActions.updateNote);
 
 //delete - usunięcie danych
 router.delete("/notes/:id", noteActions.deleteNote);
