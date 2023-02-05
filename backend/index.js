@@ -1,22 +1,28 @@
 const { json } = require("body-parser");
 const bodyParser = require("body-parser");
 const express = require("express");
-const { port } = require("./config");
-const apiRouter = require("./routes/api");
+const env = require("dotenv");
 const app = express();
+const apiRouter = require("./routes/routes");
+const cors = require("cors");
+//parsers
+app.use(bodyParser.json());
+
+//include local .env file to my project
+env.config();
 
 //db
 require("./db/mongoose");
 
-//parsers
-//Content-type: application/json
-app.use(bodyParser.json())
+app.use(cors());
 
-
-//routes 
+//routes
 app.use("/api/", apiRouter);
 
-//server
-app.listen(port, function () {
-  console.log(`Serwer słucha... http://localhost:` + port);
+app.listen(3001, (req, res) => {
+  console.log("Server is listening...");
+});
+
+app.get("/", (req, res) => {
+  res.send("To jest strona główna.");
 });
