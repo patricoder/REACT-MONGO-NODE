@@ -11,17 +11,20 @@ class Axios {
       url: `${process.env.REACT_APP_DB}/add`,
       data: workout,
     })
-      .then((res) => NotificationManager.success(res.message))
+      .then((res) => {
+        console.log(res);
+        NotificationManager.success(res.message);
+      })
       .catch((error) => {
         console.log(error);
-        NotificationManager.error(error.message)
+        NotificationManager.error(error.response.data);
       });
   }
 
-  async showWorkouts() {
-    try {
-    } catch (error) {}
-  }
+  // async showWorkouts() {
+  //   try {
+  //   } catch (error) {}
+  // }
 }
 
 export default new Axios();

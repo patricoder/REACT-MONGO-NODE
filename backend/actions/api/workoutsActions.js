@@ -26,7 +26,7 @@ class WorkoutsActions {
     } catch (error) {
       return res.status(400).send(error.message);
     }
-    res.status(200).json(data);
+    res.status(200).json({ message: "Pomyślnie dodano!", response: res });
   }
 }
 
