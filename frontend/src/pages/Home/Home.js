@@ -12,6 +12,8 @@ import {
   RightCol,
   Heading,
 } from "./Home.styled";
+import { NotificationContainer } from "react-notifications";
+import "react-notifications/lib/notifications.css";
 
 const Home = () => {
   return (
@@ -40,6 +42,7 @@ const Home = () => {
         </LeftCol>
         <RightCol>
           <Outlet />
+          <NotificationContainer />
         </RightCol>
       </Main>
     </Wrapper>

@@ -1,8 +1,8 @@
 import axios from "axios";
+import { NotificationManager } from "react-notifications";
 
 class Axios {
   async postWorkout(workout) {
-    console.log(workout);
     axios({
       method: "post",
       headers: {
@@ -11,8 +11,16 @@ class Axios {
       url: `${process.env.REACT_APP_DB}/add`,
       data: workout,
     })
-      .then((res) => console.log(res))
-      .catch((error) => console.log(error.response.data));
+      .then((res) => NotificationManager.success(res.message))
+      .catch((error) => {
+        console.log(error);
+        NotificationManager.error(error.message)
+      });
+  }
+
+  async showWorkouts() {
+    try {
+    } catch (error) {}
   }
 }
 
