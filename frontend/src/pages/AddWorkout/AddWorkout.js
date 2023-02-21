@@ -1,11 +1,11 @@
 import { Form, Label, Text, Input, Select, Option } from "./AddWorkout.styled";
-import Button from "../../components";
+import { Button } from "../../components";
 import { useRef } from "react";
 import Axios from "../../lib/axios";
 const AddWorkout = () => {
-  const name = useRef();
-  const category = useRef();
-  const part = useRef();
+  const name = useRef(null);
+  const category = useRef(null);
+  const part = useRef(null);
 
   const formSubmit = (e) => {
     e.preventDefault();

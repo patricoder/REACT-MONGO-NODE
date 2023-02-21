@@ -1,4 +1,3 @@
-const { mongoose } = require("mongoose");
 const { Workout } = require("../../db/models/workout");
 
 class WorkoutsActions {
@@ -26,7 +25,20 @@ class WorkoutsActions {
     } catch (error) {
       return res.status(400).send(error.message);
     }
-    res.status(200).json({ message: "Pomyślnie dodano!", response: res });
+    res.status(200).json("Dodano pomyślnie do bazy.");
+  }
+
+  async deleteWorkout(req, res) {
+    const id = req.params.id;
+    //usuwanie notatki
+    try {
+      await Workout.deleteOne({
+        _id: id,
+      });
+    } catch (error) {
+      return res.status(400).send(error.message);
+    }
+    res.status(200).json({ message: "Ćwiczenie usunięte pomyślnie." });
   }
 }
 

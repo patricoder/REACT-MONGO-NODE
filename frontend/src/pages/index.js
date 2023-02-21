@@ -1,3 +1,8 @@
 import Home from "./Home/Home";
 import AddWorkout from "./AddWorkout/AddWorkout";
-export { Home, AddWorkout };
+import AvailableExercises from "./AvailableExercises/AvailableExercises";
+import CreatePlan from "./CreatePlan/CreatePlan";
+import MyPlans from "./MyPlans/MyPlans";
+import MyPlan from "./MyPlan/MyPlan";
+
+export { Home, AddWorkout, AvailableExercises, CreatePlan, MyPlans, MyPlan };

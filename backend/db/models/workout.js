@@ -12,17 +12,19 @@ const { Schema, model } = require("mongoose");
 const WorkoutSchema = new Schema({
   name: {
     type: String,
-    required: true,
+    required: [true, "Pole 'Nazwa ćwiczenia' jest wymagane!"],
   },
   category: {
     type: String,
-    required: true,
+    required: [true, "Pole 'Kategoria' jest wymagane!"],
   }, //gym || calistenics
   part: {
     type: String,
-    required: true,
+    required: [true, "Pole 'Partia' jest wymagane!"],
   }, // part of body
 });
+
+
 
 // const Comment = model("Comment", CommentSchema);
 const Workout = model("Workout", WorkoutSchema);

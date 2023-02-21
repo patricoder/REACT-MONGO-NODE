@@ -20,7 +20,6 @@ const GlobalStyle = createGlobalStyle`
         height: 100%;
         font-size: 18px;
         font-family: 'Barlow', sans-serif;
-        overflow: hidden;
     }
     #root {
         height: 100%;
