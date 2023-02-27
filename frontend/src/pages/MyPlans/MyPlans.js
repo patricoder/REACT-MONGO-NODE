@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { HandPointRight, Loading } from "../../components";
 import axios from "axios";
-import { Image, Text, Wrapper } from "./MyPlans.styled";
+import { Div, Image, Text, Wrapper } from "./MyPlans.styled";
 import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleRight, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 function MyPlans(props) {
   const [myPlans, setMyPlans] = useState();
   const [loading, setLoading] = useState(true);
@@ -33,12 +35,22 @@ function MyPlans(props) {
       {myPlans &&
         myPlans.map((item) => {
           return (
-            <NavLink to={`${item._id}`} key={item._id}>
-              <Wrapper className="myplan">
-                <Text>{item.name}</Text>
-                <HandPointRight />
-              </Wrapper>
-            </NavLink>
+            <Wrapper>
+              <NavLink to={`${item._id}`} key={item._id} className="myplan">
+                <Div className="myplan__leftCol">
+                  <Text className="myplan__name">{item.name}</Text>
+                  <Text className="myplan__details">
+                    {item.workouts.length} excercises
+                  </Text>
+                </Div>
+                <Div className="myplan__rightCol">
+                  <FontAwesomeIcon
+                    icon={faAngleRight}
+                    className="myplan__icon"
+                  />
+                </Div>
+              </NavLink>
+            </Wrapper>
           );
         })}
     </Wrapper>

@@ -169,6 +169,8 @@ export const RightCol = styled.div`
   background-color: #18181c;
   color: white !important;
   width: 100%;
+  position: relative;
+  overflow: hidden;
 `;
 
 export const Main = styled.div`

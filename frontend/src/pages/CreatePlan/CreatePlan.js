@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "../../components";
+import { AddExcerciseModal, Button } from "../../components";
 import {
   Wrapper,
   Title,
@@ -9,40 +9,35 @@ import {
   Text,
   RedText,
   WorkoutsWrapper,
-  WorkoutsTable,
   Row,
   Col,
   Error,
-  DeleteExcercise,
-  Select,
-  Option,
 } from "./CreatePlan.styled";
 import Axios from "../../lib/axios";
+import { faT, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const CreatePlan = () => {
+  const [openModal, setOpenModal] = useState(false);
+
   const [errors, setErrors] = useState({
     name: false,
-    description: false,
     excname: false,
-    excseries: false,
-    excrepeats: false,
+    excseriesCount: false,
     excunit: false,
   });
 
   const [trainingPlan, setTrainingPlan] = useState({
     userId: "va9867dasd58asd4asd657",
-    name: "",
-    description: "",
+    name: "Nazwa planu treningowego",
     workouts: [],
-    message: "",
   });
 
   const [excercise, setExcercise] = useState({
-    name: "",
-    series: 0,
+    name: "Ćwiczenie",
+    seriesCount: 4,
     repeats: 0,
-    score: 0,
-    lastScore: 0,
+    series: [],
     unit: "",
   });
 
@@ -54,39 +49,58 @@ const CreatePlan = () => {
     }));
   }
 
+  const seriesHandler = () => {};
+
   const excHandler = (e) => {
     const { name, value } = e.target;
-    console.log(typeof value, name);
     setExcercise((prevState) => ({
       ...prevState,
-      [name]: name === "series" || name === "repeats" ? Number(value) : value,
+      [name]:
+        name === "seriesCount" || name === "repeats" ? Number(value) : value,
     }));
   };
 
   const addExcercise = () => {
     if (
       excercise.name !== "" &&
-      excercise.repeats !== 0 &&
-      excercise.series !== 0
+      excercise.series !== 0 &&
+      excercise.seriesCount !== 0
     ) {
       setTrainingPlan((prevState) => ({
         ...prevState,
         workouts: [...prevState.workouts, excercise],
       }));
+
+      for (let i = 1; i <= excercise.seriesCount; i++) {
+        console.log(i);
+        setExcercise((prevState) => ({
+          ...prevState,
+          series: [
+            ...prevState.series,
+            {
+              serie: i,
+              repeats: 0,
+              score: 0,
+              lastRepeats: 0,
+              lastScore: 0,
+              timeSpend: 0,
+            },
+          ],
+        }));
+      }
+
       setExcercise({
         name: "",
-        series: "",
-        repeats: "",
-        score: 0,
-        lastScore: 0,
+        seriesCount: 0,
+        repeats: 0,
+        series: [],
         unit: "",
       });
     }
   };
 
   const checkExcercise = () => {
-    let noError;
-
+    let noError = true;
     for (const excItem in excercise) {
       if (
         excercise[excItem].length === 0 ||
@@ -102,13 +116,10 @@ const CreatePlan = () => {
         }
       } else {
         setErrors((prevState) => ({ ...prevState, ["exc" + excItem]: false }));
-        noError = true;
       }
     }
 
     //sprawdź czy error
-    console.log(noError, errors, excercise);
-
     noError && addExcercise();
   };
 
@@ -120,26 +131,34 @@ const CreatePlan = () => {
   };
 
   const formSubmit = (e) => {
+    // let noError = true;
     e.preventDefault();
-    for (const planItem in trainingPlan) {
-      if (trainingPlan[planItem].length === 0) {
-        errors.hasOwnProperty(planItem) &&
-          setErrors((prevState) => ({ ...prevState, [planItem]: true }));
-      } else {
-        setErrors((prevState) => ({ ...prevState, [planItem]: false }));
-      }
-    }
+    // for (const planItem in trainingPlan) {
+    //   if (
+    //     trainingPlan[planItem].length === 0 ||
+    //     trainingPlan[planItem] === 0 ||
+    //     trainingPlan[planItem] === ""
+    //   ) {
+    //     if (errors.hasOwnProperty(planItem)) {
+    //       setErrors((prevState) => ({ ...prevState, [planItem]: true }));
+    //       noError = false;
+    //     }
+    //   } else {
+    //     setErrors((prevState) => ({ ...prevState, [planItem]: false }));
+    //   }
+    // }
+
     console.log(trainingPlan);
     Axios.addPlan(trainingPlan);
   };
 
   return (
     <Wrapper>
-      <Title>Kreator twojego planu treningowego</Title>
+      <Title>Add workout</Title>
       <Form onSubmit={(e) => formSubmit(e)}>
         <Label>
           <Text>
-            Nazwa twojego planu: <RedText>*</RedText>
+            Workout name: <RedText>*</RedText>
           </Text>
           <Input
             name="name"
@@ -149,97 +168,48 @@ const CreatePlan = () => {
           />
           {errors.name && <Error>Podaj nazwę planu treningowego!</Error>}
         </Label>
-        <Label>
-          <Text>
-            Opis twojego planu: <RedText>*</RedText>
-          </Text>
-          <Input
-            name="description"
-            type="text"
-            value={trainingPlan.description}
-            onChange={(e) => inputHandler(e)}
-          />
-          {errors.description && (
-            <Error>Dodaj opis do swojego planu treningowego!</Error>
-          )}
-        </Label>
 
-        <WorkoutsWrapper>
-          <Label>
-            <Text>
-              Nazwa ćwiczenia: <RedText>*</RedText>
-            </Text>
-            <Input
-              name="name"
-              value={excercise.name}
-              onChange={(e) => excHandler(e)}
-            />
-            {errors.excname && <Error>Jakie ćwiczenie?</Error>}
-          </Label>
-          <Label>
-            <Text>
-              Ilość serii: <RedText>*</RedText>
-            </Text>
-            <Input
-              name="series"
-              type="number"
-              min={0}
-              value={excercise.series}
-              onChange={(e) => excHandler(e)}
-            />
-            {errors.excseries && <Error>Ile serii?</Error>}
-          </Label>
-          <Label>
-            <Text>
-              Ilość powtórzeń: <RedText>*</RedText>
-            </Text>
-            <Input
-              name="repeats"
-              type="number"
-              min={0}
-              max={30}
-              value={excercise.repeats}
-              onChange={(e) => excHandler(e)}
-            />
-            {errors.excrepeats && <Error>Ile powtórzeń?</Error>}
-          </Label>
+        <Button
+          text="Add excercise"
+          type="button"
+          fun={() => setOpenModal(true)}
+          className="form__button"
+        />
 
-          <Label>
-            <Text>
-              Jednostka: <RedText>*</RedText>
-            </Text>
-            <Select onChange={(e) => excHandler(e)} name="unit">
-              <Option value="">wybierz...</Option>
-              <Option value="kg">kg</Option>
-              <Option value="x">powtórzenia</Option>
-              <Option value="min">min</Option>
-            </Select>
-            {errors.excunit && <Error>Jaka jednostka?</Error>}
-          </Label>
-        </WorkoutsWrapper>
-        <Button text="+" type="button" fun={checkExcercise} />
-
-        {trainingPlan.workouts.length > 0 && (
-          <WorkoutsTable>
-            <Row>
-              <Col>Ćwiczenie</Col>
-              <Col>Serie</Col>
-              <Col>Powtórzenia</Col>
+        {trainingPlan.workouts.map((item, index) => {
+          return (
+            <Row className="row row__excerciseName">
+              <Col className="col__excerciseDetails">
+                <Text>Nazwa: {item.name}</Text>
+                <Text className="excercise__details">
+                  Series: {item.seriesCount}
+                </Text>
+              </Col>
+              <Col className="col__excerciseDelete">
+                <FontAwesomeIcon
+                  icon={faTrash}
+                  onClick={() => deleteExcercise(index)}
+                  className="excercise__delete"
+                />
+              </Col>
             </Row>
-            {trainingPlan.workouts.map((item, index) => {
-              return (
-                <Row key={index}>
-                  <Col>{item.name}</Col>
-                  <Col>{item.series}</Col>
-                  <Col>{item.repeats}x</Col>
-                  <DeleteExcercise onClick={() => deleteExcercise(index)} />
-                </Row>
-              );
-            })}
-          </WorkoutsTable>
+          );
+        })}
+
+        {trainingPlan.workouts.length >= 3 ? (
+          <Button text="Dodaj plan" type="submit" />
+        ) : (
+          <Error className="error__info">
+            To create your workout plan you need to add at least 3 excercises!
+          </Error>
         )}
-        <Button text="Dodaj plan" type="submit" />
       </Form>
+      {openModal && (
+        <AddExcerciseModal
+          setOpenModal={setOpenModal}
+          setTrainingPlan={setTrainingPlan}
+        />
+      )}
     </Wrapper>
   );
 };

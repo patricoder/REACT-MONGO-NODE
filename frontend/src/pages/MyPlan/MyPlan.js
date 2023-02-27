@@ -1,22 +1,21 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Loading } from "../../components";
+import { EditExcerciseModal, Excercise, Loading } from "../../components";
 import { useParams } from "react-router-dom";
-import {
-  ExcerciseWrapper,
-  Title,
-  Wrapper,
-  Text,
-  Details,
-  Row,
-} from "./MyPlan.styled";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { Wrapper, Text } from "./MyPlan.styled";
 
 const MyPlan = () => {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState();
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const [currentEdit, setCurrentEdit] = useState();
+  const [editData, setEditData] = useState({
+    excerciseId: "",
+    series: 0,
+    repeats: 0,
+    score: 0,
+  });
 
   const getPlanById = async (planId) => {
     let data;
@@ -25,20 +24,23 @@ const MyPlan = () => {
         method: "get",
         url: `${process.env.REACT_APP_DB}/training-plan/${planId}`,
       });
+      setData(data.data);
     } catch (error) {
       console.log(error);
     } finally {
-      setData(data.data);
       setLoading(false);
     }
   };
 
-  const editExcercise = (planId, excId) => {
-    console.log(data);
-    console.log("PLAN O ID: ", planId);
-    console.log("edit: ", excId);
+  const editExcercise = () => {
+    console.log("##edit");
+    console.log(editData);
   };
 
+  const cancelEditExcercise = () => {
+    console.log("Cancel");
+    setOpenEditModal(false);
+  };
   useEffect(() => {
     getPlanById(id);
   }, []);
@@ -46,28 +48,24 @@ const MyPlan = () => {
     <Loading />
   ) : (
     <Wrapper>
-      {/* <Title>{data.name}</Title>
-      <Title>{data.description}</Title> */}
+      {openEditModal && (
+        <EditExcerciseModal
+          onEdit={editExcercise}
+          onCancel={cancelEditExcercise}
+          item={currentEdit}
+          editData={editData}
+          setEditData={setEditData}
+        />
+      )}
+      <Text>{data.name}</Text>
       {data.workouts.map((item) => {
         return (
-          <ExcerciseWrapper key={item._id}>
-            <Row>
-              <Text className="exc-name">{item.name}</Text>
-              <FontAwesomeIcon
-                icon={faEdit}
-                className="exc-edit"
-                onClick={() => editExcercise(id, item._id)}
-              />
-            </Row>
-            <Details>
-              <Text>Serie: {item.series}</Text>
-              <Text>Powtórzenia: {item.repeats}x</Text>
-              <Text>
-                Wynik:
-                {item.score <= 0 ? " Dodaj pierwszy wynik." : item.score + item.unit}
-              </Text>
-            </Details>
-          </ExcerciseWrapper>
+          <Excercise
+            item={item}
+            key={item._id}
+            setOpenEditModal={setOpenEditModal}
+            setCurrentEdit={setCurrentEdit}
+          />
         );
       })}
     </Wrapper>

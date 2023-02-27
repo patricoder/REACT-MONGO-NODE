@@ -24,4 +24,7 @@ router.get("/training-plans", trainingPlanActions.showPlans);
 router.get("/training-plan/:id", trainingPlanActions.getPlanById);
 router.post("/training-plan", trainingPlanActions.addPlan);
 
+router.put("/edit-plan", trainingPlanActions.editWorkoutInPlan);
+router.get("/edit-plan", trainingPlanActions.findExcById);
+
 module.exports = router;

@@ -39,7 +39,7 @@ const AvailableExercises = () => {
         <Col>Kategoria</Col>
         <Col>Partia</Col>
       </Row>
-      {excersises.map((item) => {
+      {excersises && excersises.map((item) => {
         return (
           <Row key={item._id}>
             <Col>{item.name}</Col>
