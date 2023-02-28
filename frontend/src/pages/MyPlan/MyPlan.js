@@ -1,6 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { EditExcerciseModal, Excercise, Loading } from "../../components";
+import {
+  EditExcerciseModal,
+  Excercise,
+  Loading,
+  Portal,
+} from "../../components";
 import { useParams } from "react-router-dom";
 import { Wrapper, Text } from "./MyPlan.styled";
 
@@ -12,6 +17,7 @@ const MyPlan = () => {
   const [currentEdit, setCurrentEdit] = useState();
   const [editData, setEditData] = useState({
     excerciseId: "",
+    serieId: "",
     series: 0,
     repeats: 0,
     score: 0,
@@ -33,8 +39,17 @@ const MyPlan = () => {
   };
 
   const editExcercise = () => {
-    console.log("##edit");
-    console.log(editData);
+    if (editData.series !== 0) {
+      const serieId = currentEdit.series.find(
+        (item) => item.serie === Number(editData.series)
+      )._id;
+
+      let data = {
+        ...editData,
+        serieId,
+      };
+      console.log(data);
+    }
   };
 
   const cancelEditExcercise = () => {
@@ -49,13 +64,15 @@ const MyPlan = () => {
   ) : (
     <Wrapper>
       {openEditModal && (
-        <EditExcerciseModal
-          onEdit={editExcercise}
-          onCancel={cancelEditExcercise}
-          item={currentEdit}
-          editData={editData}
-          setEditData={setEditData}
-        />
+        <Portal>
+          <EditExcerciseModal
+            onEdit={editExcercise}
+            onCancel={cancelEditExcercise}
+            item={currentEdit}
+            editData={editData}
+            setEditData={setEditData}
+          />
+        </Portal>
       )}
       <Text>{data.name}</Text>
       {data.workouts.map((item) => {

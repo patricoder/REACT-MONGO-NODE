@@ -26,13 +26,13 @@ const EditExcerciseModal = ({
     setEditData((prevState) => {
       return {
         ...prevState,
-        [name]: value,
+        [name]: Number(value),
       };
     });
   };
 
   useEffect(() => {
-    console.log(item);
+    // console.log(item);
     setEditData((prevState) => {
       return {
         ...prevState,

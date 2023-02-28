@@ -8,6 +8,7 @@ export const Wrapper = styled.div`
   background-color: #222126;
   color: black;
   width: 90%;
+  max-width: 30rem;
   translate: -50% 0;
   top: 5%;
   left: 50%;

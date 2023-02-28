@@ -4,6 +4,7 @@ import HandPointRight from "./HandPointRight/HandPointRight";
 import EditExcerciseModal from "./EditExcerciseModal/EditExcerciseModal";
 import Excercise from "./Excercise/Excercise";
 import AddExcerciseModal from "./AddExcerciseModal/AddExcerciseModal";
+import Portal from "./Portal/Portal";
 export {
   Button,
   Loading,
@@ -11,4 +12,5 @@ export {
   EditExcerciseModal,
   Excercise,
   AddExcerciseModal,
+  Portal
 };
