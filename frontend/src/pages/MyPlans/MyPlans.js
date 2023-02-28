@@ -35,8 +35,8 @@ function MyPlans(props) {
       {myPlans &&
         myPlans.map((item) => {
           return (
-            <Wrapper>
-              <NavLink to={`${item._id}`} key={item._id} className="myplan">
+            <Wrapper key={item._id}>
+              <NavLink to={`${item._id}`} className="myplan">
                 <Div className="myplan__leftCol">
                   <Text className="myplan__name">{item.name}</Text>
                   <Text className="myplan__details">

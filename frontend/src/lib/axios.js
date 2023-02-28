@@ -70,6 +70,27 @@ class Axios {
         //   : NotificationManager.error(error.message);
       });
   }
+
+  async editWorkout(data) {
+    axios({
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      url: `${process.env.REACT_APP_DB}/edit-plan`,
+      data,
+    })
+      .then((res) => {
+        console.log(res);
+        NotificationManager.success(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        // error.response?.data
+        //   ? NotificationManager.error(error.response.data)
+        //   : NotificationManager.error(error.message);
+      });
+  }
 }
 
 export default new Axios();

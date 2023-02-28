@@ -46,7 +46,7 @@ class TrainingPlanActions {
 
   async findExcById(req, res) {
     console.log(req.body);
-    const { series, repeats, score, excerciseId } = req.body;
+    const { excerciseId, serieId, series, repeats, score } = req.body;
     let data;
     try {
       data = await TrainingPlan.findOne({
@@ -54,9 +54,7 @@ class TrainingPlanActions {
           $elemMatch: {
             _id: excerciseId,
             series: {
-              $elemMatch: {
-                serie: series,
-              },
+              _id: serieId,
             },
           },
         },
@@ -69,18 +67,9 @@ class TrainingPlanActions {
   }
 
   async editWorkoutInPlan(req, res) {
-    const { series, repeats, score, excerciseId } = req.body;
+    const { excerciseId, serieId, repeats, score } = req.body;
     let data;
     try {
-      // data = await TrainingPlan.find({
-      //   _id: planId,
-      //   workouts: {
-      //     $elemMatch: {
-      //       _id: excId,
-      //     },
-      //   },
-      // });
-
       data = await TrainingPlan.updateOne(
         {
           workouts: {
@@ -88,7 +77,7 @@ class TrainingPlanActions {
               _id: excerciseId,
               series: {
                 $elemMatch: {
-                  serie: series,
+                  _id: serieId,
                 },
               },
             },
@@ -96,12 +85,15 @@ class TrainingPlanActions {
         },
         {
           $set: {
-            "workouts.$[outer].series.$[inner].repeats": 1000,
-            "workouts.$[outer].series.$[inner].score": 2000,
+            "workouts.$[outer].series.$[inner].repeats": repeats,
+            "workouts.$[outer].series.$[inner].score": score,
           },
         },
         {
-          arrayFilters: [{ "outer._id": excId }, { "inner._id": serieId }],
+          arrayFilters: [
+            { "outer._id": excerciseId },
+            { "inner._id": serieId },
+          ],
         }
       );
 
@@ -109,7 +101,7 @@ class TrainingPlanActions {
     } catch (error) {
       return res.status(400).send(error.message);
     }
-    res.send(data);
+    res.status(200).json("Edited successfully");
   }
 }
 

@@ -5,6 +5,7 @@ import EditExcerciseModal from "./EditExcerciseModal/EditExcerciseModal";
 import Excercise from "./Excercise/Excercise";
 import AddExcerciseModal from "./AddExcerciseModal/AddExcerciseModal";
 import Portal from "./Portal/Portal";
+import Error from "./Error/Error";
 export {
   Button,
   Loading,
@@ -12,5 +13,6 @@ export {
   EditExcerciseModal,
   Excercise,
   AddExcerciseModal,
-  Portal
+  Portal,
+  Error,
 };
