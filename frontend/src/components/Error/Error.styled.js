@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const Text = styled.p`
-  font-size: 1.8rem;
+  font-size: 1.3rem;
   color: red;
-  font-weight: bold;
+  margin-top: .5rem;
+  font-weight: 500;
 `;

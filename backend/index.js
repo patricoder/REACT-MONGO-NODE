@@ -26,3 +26,5 @@ app.listen(3001, (req, res) => {
 app.get("/", (req, res) => {
   res.send("To jest strona główna.");
 });
+
+

@@ -6,6 +6,7 @@ import {
   CreatePlan,
   MyPlans,
   MyPlan,
+  Login,
 } from "./pages";
 import GlobalStyle from "./theme/GlobalStyles";
 function App() {
@@ -21,7 +22,7 @@ function App() {
           <Route path="/add-workouts" element={<AddWorkout />} />
         </Route>
 
-        <Route path="/login" element={<> Login </>} />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<> Register </>} />
       </Routes>
     </BrowserRouter>

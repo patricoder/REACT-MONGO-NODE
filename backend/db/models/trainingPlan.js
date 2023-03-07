@@ -18,10 +18,6 @@ const TrainingPlanWorkoutSchema = new Schema({
     type: Number,
     required: [true, "Pole 'Ilość serii' jest wymagane!"],
   },
-  repeats: {
-    type: Number,
-    required: [true, "Pole 'Ilość powtórzeń' jest wymagane!"],
-  },
   unit: {
     type: String,
     required: [true, "Pole 'Jednostka' jest wymagane!"],

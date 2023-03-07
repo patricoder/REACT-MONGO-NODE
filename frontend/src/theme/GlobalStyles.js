@@ -19,7 +19,8 @@ const GlobalStyle = createGlobalStyle`
         /* min-height: 100%; */
         height: 100%;
         font-size: 18px;
-        font-family: 'Barlow', sans-serif;
+        font-family: 'Lato', sans-serif;
+        background-color: #18181c;
     }
     #root {
         height: 100%;

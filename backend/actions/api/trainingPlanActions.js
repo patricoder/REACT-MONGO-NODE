@@ -41,7 +41,7 @@ class TrainingPlanActions {
     } catch (error) {
       return res.status(400).send(error.message);
     }
-    res.send(req.body);
+    res.status(201).json("Plan created successfully");
   }
 
   async findExcById(req, res) {

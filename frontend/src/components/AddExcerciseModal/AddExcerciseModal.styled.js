@@ -1,18 +1,20 @@
 import styled from "styled-components";
+import { SectionTitle } from "../../theme/Title";
 
 export const Wrapper = styled.div`
   border-radius: 0.5rem;
   padding: 0.5rem 1rem;
-  position: absolute;
+  position: fixed;
   background-color: #222126;
   color: black;
   width: 90%;
   min-height: 30rem;
   translate: -50% 0;
-  top: 5%;
+  top: 20%;
   left: 50%;
   display: flex;
   flex-direction: column;
+  z-index: 1;
   .modal__icon {
     margin-left: auto;
     color: white;
@@ -76,3 +78,5 @@ export const Row = styled.div`
     gap: 1rem;
   }
 `;
+
+export const Title = styled(SectionTitle)``;

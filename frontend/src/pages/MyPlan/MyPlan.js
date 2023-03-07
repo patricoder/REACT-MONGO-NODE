@@ -5,7 +5,7 @@ import {
   Excercise,
   Loading,
   Portal,
-  Error,
+  ErrorMsg,
 } from "../../components";
 import { useParams } from "react-router-dom";
 import { Wrapper, Text } from "./MyPlan.styled";
@@ -25,35 +25,33 @@ const MyPlan = () => {
     score: 0,
   });
 
-  const getPlanById = async (planId, controller) => {
-    console.log("#fetching");
+  const getPlanById = async (planId) => {
     let data;
     try {
-      data = await axios({
-        method: "get",
-        url: `${process.env.REACT_APP_DB}/training-plan/${planId}`,
-        signal: controller.signal,
-      });
+      data = await axios.get(
+        `${process.env.REACT_APP_DB}/training-plan/${planId}`
+        // {
+        //   signal: controller.signal,
+        // }
+      );
       setData(data.data);
     } catch (error) {
-      throw new Error("Błąd API");
-      setData(false);
     } finally {
       setLoading(false);
     }
   };
 
   const editExcercise = () => {
-    if (editData.series === 0) return;
-    const serieId = currentEdit.series.find(
+    const serie = currentEdit.series.find(
       (item) => item.serie === Number(editData.series)
-    )._id;
-
+    );
+    console.log(serie._id, editData);
     let data = {
       ...editData,
-      serieId,
+      serieId: serie._id,
+      lastScore: serie.score,
     };
-
+    console.log(data);
     Axios.editWorkout(data);
     setOpenEditModal(false);
     setPut(!put);
@@ -77,17 +75,13 @@ const MyPlan = () => {
     setOpenEditModal(false);
   };
   useEffect(() => {
-    const controller = new AbortController();
-    getPlanById(id, controller);
-
-    return () => {
-      controller.abort();
-    };
+    // const controller = new AbortController();
+    getPlanById(id);
   }, [put]);
   return loading ? (
     <Loading />
   ) : !data ? (
-    <Error>Problem with database connection, try again later.</Error>
+    <ErrorMsg>Problem with database connection, try again later.</ErrorMsg>
   ) : (
     <Wrapper>
       {openEditModal && (

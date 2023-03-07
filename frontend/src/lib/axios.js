@@ -60,8 +60,7 @@ class Axios {
       data,
     })
       .then((res) => {
-        console.log(res);
-        // NotificationManager.success(res.data);
+        NotificationManager.success(res.data);
       })
       .catch((error) => {
         console.log(error);

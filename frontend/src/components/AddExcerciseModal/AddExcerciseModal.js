@@ -8,15 +8,21 @@ import {
   Select,
   Option,
   Row,
+  Title,
+  Error,
 } from "./AddExcerciseModal.styled";
 import { Button } from "../index";
 import { useState } from "react";
 
-const AddExcerciseModal = ({ setOpenModal, setTrainingPlan }) => {
+const AddExcerciseModal = ({
+  setOpenModal,
+  setTrainingPlan,
+  errors,
+  setErrors,
+}) => {
   const [excercise, setExcercise] = useState({
     name: "",
     seriesCount: 0,
-    repeats: 0,
     series: [],
     unit: "",
   });
@@ -29,6 +35,27 @@ const AddExcerciseModal = ({ setOpenModal, setTrainingPlan }) => {
         [name]: value,
       };
     });
+  };
+
+  const validate = (values) => {
+    let errors = {};
+    if (!values.name) {
+      errors.excName = "Field 'Excercise' is required!";
+    }
+    if (values.seriesCount === 0) {
+      errors.excSeries = "Field 'Series' can't be equal to 0!";
+    }
+    if (values.unit === "") {
+      errors.excUnit = "Field 'Unit' can't be empty!";
+    }
+    if (Object.keys(errors).length === 0) {
+      setTrainingPlan((prevState) => ({
+        ...prevState,
+        workouts: [...prevState.workouts, excercise],
+      }));
+      setOpenModal(false);
+    }
+    return errors;
   };
 
   const addSerie = () => {
@@ -60,12 +87,9 @@ const AddExcerciseModal = ({ setOpenModal, setTrainingPlan }) => {
       series: filteredSeries,
     }));
   };
+
   const submitExcercise = () => {
-    setTrainingPlan((prevState) => ({
-      ...prevState,
-      workouts: [...prevState.workouts, excercise],
-    }));
-    setOpenModal(false);
+    setErrors(validate(excercise));
   };
   return (
     <Wrapper>
@@ -74,6 +98,7 @@ const AddExcerciseModal = ({ setOpenModal, setTrainingPlan }) => {
         className="modal__icon"
         onClick={() => setOpenModal(false)}
       />
+      <Title>Add excercise</Title>
       <Label>
         <Text>Excercise: </Text>
         <Input
@@ -81,6 +106,7 @@ const AddExcerciseModal = ({ setOpenModal, setTrainingPlan }) => {
           value={excercise.name}
           onChange={(e) => inputHandler(e)}
         />
+        {errors.excName && <Error>{errors.excName}</Error>}
       </Label>
 
       <Label>
@@ -101,16 +127,22 @@ const AddExcerciseModal = ({ setOpenModal, setTrainingPlan }) => {
             style="delete"
           />
         </Row>
+        {errors.excSeries && <Error>{errors.excSeries}</Error>}
       </Label>
 
       <Label>
         <Text>Unit:</Text>
-        <Select name="unit" onChange={(e) => inputHandler(e)} value={excercise.unit}>
+        <Select
+          name="unit"
+          onChange={(e) => inputHandler(e)}
+          value={excercise.unit}
+        >
           <Option value="">choose...</Option>
           <Option value="kg">kg</Option>
           <Option value="x">repeats</Option>
           <Option value="min">minutes</Option>
         </Select>
+        {errors.excUnit && <Error>{errors.excUnit}</Error>}
       </Label>
       <Button
         text="Add excercise"

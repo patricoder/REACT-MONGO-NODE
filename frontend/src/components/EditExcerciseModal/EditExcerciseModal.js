@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { Button } from "../index";
+import { useEffect, useState } from "react";
+import { Button, ErrorMsg } from "../index";
 import {
   Input,
   Label,
@@ -17,8 +17,22 @@ const EditExcerciseModal = ({
   editData,
   setEditData,
 }) => {
-  const getSeriesId = (id) => {
-    console.log("seriesid", id);
+  const [errors, setErrors] = useState({});
+  const validate = (values) => {
+    let error = {};
+    if (values.series === 0) {
+      error.series = "Field 'Series' is required!";
+    }
+    if (values.repeats === 0) {
+      error.repeats = "Field 'Repeats' can't be equal to 0!";
+    }
+    if (values.score === 0) {
+      error.score = "Field 'Score' can't be equal to 0!";
+    }
+    if (Object.keys(error).length === 0) {
+      onEdit();
+    }
+    return error;
   };
 
   const inputHandler = (e) => {
@@ -31,8 +45,11 @@ const EditExcerciseModal = ({
     });
   };
 
+  const submitEdit = () => {
+    setErrors(validate(editData));
+  };
+
   useEffect(() => {
-    // console.log(item);
     setEditData((prevState) => {
       return {
         ...prevState,
@@ -40,17 +57,13 @@ const EditExcerciseModal = ({
       };
     });
   }, []);
-
-  //   planId: "",
-  // excerciseId: "",
-  // series: 0,
-  // repeats: 0,
-  // score: 0,
   return (
     <Wrapper>
       <Title>{item.name}</Title>
       <Label>
-        <Text>Series</Text>
+        <Text>
+          Series<sup>(You want to edit)</sup>
+        </Text>
         <Select
           name="series"
           value={editData.series}
@@ -65,25 +78,32 @@ const EditExcerciseModal = ({
             );
           })}
         </Select>
+        {errors.series && <ErrorMsg>{errors.series}</ErrorMsg>}
       </Label>
       <Label>
-        <Text>Repeats</Text>
+        <Text>
+          Repeats<sup>(You assume to do)</sup>
+        </Text>
         <Input
           name="repeats"
           value={editData.repeats}
           onChange={(e) => inputHandler(e)}
         />
+        {errors.repeats && <ErrorMsg>{errors.repeats}</ErrorMsg>}
       </Label>
       <Label>
-        <Text>Score</Text>
+        <Text>
+          Score<sup>(You did)</sup>
+        </Text>
         <Input
           name="score"
           value={editData.score}
           onChange={(e) => inputHandler(e)}
         />
+        {errors.score && <ErrorMsg>{errors.score}</ErrorMsg>}
       </Label>
       <Row className="buttons__wrapper">
-        <Button text="edytuj" fun={onEdit} />
+        <Button text="edytuj" fun={submitEdit} />
         <Button text="anuluj" style={"delete"} fun={onCancel} />
       </Row>
     </Wrapper>

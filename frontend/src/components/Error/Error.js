@@ -1,8 +1,8 @@
 import React from "react";
 import { Text } from "./Error.styled";
 
-const Error = ({ children }) => {
+const ErrorMsg = ({ children }) => {
   return <Text>{children}</Text>;
 };
 
-export default Error;
+export default ErrorMsg;

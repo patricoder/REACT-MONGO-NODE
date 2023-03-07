@@ -13,7 +13,6 @@ export const Header = styled.div`
   background-color: #18181c;
   border: 2px solid #222126;
   padding: 1.5rem 0;
-  z-index: 1;
   ${Container} {
     display: flex;
     justify-content: space-between;
