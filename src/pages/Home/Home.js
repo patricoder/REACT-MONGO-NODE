@@ -40,16 +40,16 @@ const Home = () => {
             </Hamburger>
           </Row>
           <Row className={open ? "navmenu open" : "navmenu"}>
-            <Link to="/show-excersises">
+            <Link to="show-excersises">
               <Text>Dostępne ćwiczenia</Text>
             </Link>
-            <Link to="/create-plan">
+            <Link to="create-plan">
               <Text>Stwórz plan</Text>
             </Link>
-            <Link to="/my-plans">
+            <Link to="my-plans">
               <Text>Moje plany treningowe</Text>
             </Link>
-            <Link to="/add-workouts">
+            <Link to="add-workouts">
               <Text>Dodaj ćwiczenia</Text>
             </Link>
           </Row>

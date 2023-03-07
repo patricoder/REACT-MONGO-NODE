@@ -14,12 +14,12 @@ function App() {
     <BrowserRouter>
       <GlobalStyle />
       <Routes>
-        <Route path="/REACT-MONGO-NODE" element={<Home />}>
-          <Route path="/show-excersises" element={<AvailableExercises />} />
-          <Route path="/create-plan" element={<CreatePlan />} />
-          <Route path="/my-plans" element={<MyPlans />} />
-          <Route path="/my-plans/:id" element={<MyPlan />} />
-          <Route path="/add-workouts" element={<AddWorkout />} />
+        <Route path="REACT-MONGO-NODE/" element={<Home />}>
+          <Route path="show-excersises" element={<AvailableExercises />} />
+          <Route path="create-plan" element={<CreatePlan />} />
+          <Route path="my-plans" element={<MyPlans />} />
+          <Route path="my-plans/:id" element={<MyPlan />} />
+          <Route path="add-workouts" element={<AddWorkout />} />
         </Route>
 
         <Route path="/login" element={<Login />} />
