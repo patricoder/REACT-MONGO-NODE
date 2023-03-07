@@ -176,7 +176,7 @@ export const Main = styled.div`
   display: flex;
   /* grid-template-columns: 30% 70%;
   height: 100%; */
-  height: 100%;
+  /* height: 100%; */
   ${Text} {
     color: #656469;
   }

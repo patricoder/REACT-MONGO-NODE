@@ -58,6 +58,8 @@ export const Div = styled.div`
     align-items: center;
     gap: 1rem;
     padding: 0.5rem;
+    max-width: max-content;
+    margin: 0 auto;
   }
 `;
 

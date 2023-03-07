@@ -1,7 +1,6 @@
 {
   "name": "frontend",
   "version": "0.1.0",
-  "homepage": "https://marketing-webs.github.io/REACT-MONGO-NODE/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -30,8 +29,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "deploy": "npm run build && gh-pages -d build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {},
   "browserslist": {

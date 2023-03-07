@@ -45,13 +45,27 @@ const MyPlan = () => {
     const serie = currentEdit.series.find(
       (item) => item.serie === Number(editData.series)
     );
-    console.log(serie._id, editData);
     let data = {
       ...editData,
       serieId: serie._id,
       lastScore: serie.score,
     };
+    // const excercises = data.workouts.find(
+    //   (item) => item._id !== dat.excerciseId
+    // );
+    // const series = excercises.series.filter((item) => item._id !== dat.serieId);
+    // console.log(excercises, series);
+
+    // setData(prevState => {
+    //   return {
+    //     ...prevState,
+    //     workouts: [...prevState.workouts,
+
+    //     ]
+    //   }
+    // })
     console.log(data);
+
     Axios.editWorkout(data);
     setOpenEditModal(false);
     setPut(!put);

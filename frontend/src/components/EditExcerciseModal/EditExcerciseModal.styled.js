@@ -1,16 +1,27 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
+  background-color: rgba(255, 255, 255, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+`;
+
+
+export const Container = styled.div`
   border-radius: 0.5rem;
-  padding: 1rem;
+  padding: 3rem 2rem;
   position: absolute;
   z-index: 1;
   background-color: #222126;
   color: black;
-  width: 90%;
-  max-width: 30rem;
+  width: 100%;
+  max-width: 40rem;
   translate: -50% 0;
-  top: 5%;
+  top: 25%;
   left: 50%;
   display: flex;
   flex-direction: column;

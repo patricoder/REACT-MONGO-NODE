@@ -48,13 +48,9 @@ const ExcerciseTable = ({ item, setOpenEditModal, setCurrentEdit }) => {
               </Div>
             );
           })}
-          <Div className="table__edit">
+          <Div className="table__edit" onClick={editExcercise}>
             <Text className="table__edit">Edit</Text>
-            <FontAwesomeIcon
-              icon={faEdit}
-              className="table__editIcon"
-              onClick={editExcercise}
-            />
+            <FontAwesomeIcon icon={faEdit} className="table__editIcon" />
           </Div>
         </Div>
       )}
