@@ -14,7 +14,7 @@ function App() {
     <BrowserRouter>
       <GlobalStyle />
       <Routes>
-        <Route path="/" element={<Home />}>
+        <Route path="/REACT-MONGO-NODE" element={<Home />}>
           <Route path="/show-excersises" element={<AvailableExercises />} />
           <Route path="/create-plan" element={<CreatePlan />} />
           <Route path="/my-plans" element={<MyPlans />} />
