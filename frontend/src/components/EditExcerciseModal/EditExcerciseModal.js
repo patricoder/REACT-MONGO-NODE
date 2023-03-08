@@ -59,7 +59,7 @@ const EditExcerciseModal = ({
     });
   }, []);
   return (
-    <Wrapper>
+    <Wrapper onClick={onCancel}>
       <Container>
         <Title>{item.name}</Title>
         <Label>

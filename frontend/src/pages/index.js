@@ -5,7 +5,7 @@ import CreatePlan from "./CreatePlan/CreatePlan";
 import MyPlans from "./MyPlans/MyPlans";
 import MyPlan from "./MyPlan/MyPlan";
 import Login from "./Login/Login";
-
+import Register from "./Register/Register";
 export {
   Home,
   AddWorkout,
@@ -14,4 +14,5 @@ export {
   MyPlans,
   MyPlan,
   Login,
+  Register,
 };

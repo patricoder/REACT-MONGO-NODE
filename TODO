@@ -1,6 +1,6 @@
 FRONTEND
 
--Logowanie i Rejestracja
+
 -Zrobić sprawdzanie progresu w postaci porówania wartości score z serii
 -do modala edycji seri dodać suwak który umożliwi opcjonalną edycję powtórzeń
 -do kreatora planu treningowego dodać możliwość wyboru ćwiczeń z bazy dostępnych ćwiczeń (do zrobienia) lub gdy nie ma interesującego nas ćwiczenia dodać je ręcznie jako input type text

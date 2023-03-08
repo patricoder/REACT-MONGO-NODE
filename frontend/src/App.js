@@ -7,6 +7,7 @@ import {
   MyPlans,
   MyPlan,
   Login,
+  Register,
 } from "./pages";
 import GlobalStyle from "./theme/GlobalStyles";
 function App() {
@@ -23,7 +24,7 @@ function App() {
         </Route>
 
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<> Register </>} />
+        <Route path="/register" element={<Register/>} />
       </Routes>
     </BrowserRouter>
   );
