@@ -3,16 +3,23 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
   height: 100%;
   position: relative;
+  margin: 0 2.2rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+`;
+
+export const Image = styled.img`
+  max-width: 7rem;
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 3rem;
 `;
 
 export const Container = styled.div`
-  position: absolute;
   background-color: white;
   max-width: 40rem;
   width: 100%;
-  translate: -50% 0;
-  top: 10%;
-  left: 50%;
   margin: 0 auto;
   padding: 2rem 1rem;
   border-radius: 0.5rem;

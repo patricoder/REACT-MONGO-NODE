@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import logo from "../../assets/logo.svg";
+
 import { Button, ErrorMsg } from "../../components";
 import {
   Container,
@@ -9,6 +11,7 @@ import {
   Wrapper,
   Text,
   Input,
+  Image,
 } from "./Login.styled";
 
 function Login() {
@@ -38,7 +41,7 @@ function Login() {
       errors.email = "This is not a valid email format!";
     }
     if (!values.password) {
-      errors.password = "Password is required";
+      errors.password = "Password is required!";
     }
     return errors;
     console.log(errors);
@@ -46,6 +49,7 @@ function Login() {
 
   return (
     <Wrapper>
+      <Image src={logo} />
       <Container>
         <Title>Sign in</Title>
         <Form onSubmit={handleSubmit}>
