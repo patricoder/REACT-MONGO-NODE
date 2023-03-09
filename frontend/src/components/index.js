@@ -6,6 +6,7 @@ import Excercise from "./Excercise/Excercise";
 import AddExcerciseModal from "./AddExcerciseModal/AddExcerciseModal";
 import Portal from "./Portal/Portal";
 import ErrorMsg from "./Error/Error";
+import Checkbox from "./Switch/Switch";
 export {
   Button,
   Loading,

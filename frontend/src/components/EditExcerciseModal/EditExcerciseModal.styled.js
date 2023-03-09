@@ -10,7 +10,6 @@ export const Wrapper = styled.div`
   z-index: 1;
 `;
 
-
 export const Container = styled.div`
   border-radius: 0.5rem;
   padding: 3rem 2rem;
@@ -61,13 +60,23 @@ export const Input = styled.input`
   &::-webkit-outer-spin-button {
     -webkit-appearance: none;
   }
+  &:disabled {
+    opacity: .6;
+  }
 `;
 
 export const Text = styled.p`
   font-size: 1.4rem;
   color: #807f84;
-  margin-bottom: 0.5rem;
   display: inline-block;
+  text-align: center;
+`;
+
+export const Sup = styled.p`
+  font-size: 1rem;
+  color: #807f84;
+  text-align: center;
+  margin-bottom: .5rem;
 `;
 
 export const Select = styled.select`
@@ -86,6 +95,7 @@ export const Row = styled.div`
   display: flex;
   justify-content: center;
   gap: 1rem;
+
 `;
 
 export const Title = styled.p`

@@ -1,3 +1,4 @@
+import { Switch } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Button, ErrorMsg } from "../index";
 import {
@@ -10,6 +11,7 @@ import {
   Option,
   Title,
   Wrapper,
+  Sup,
 } from "./EditExcerciseModal.styled";
 const EditExcerciseModal = ({
   onEdit,
@@ -19,12 +21,14 @@ const EditExcerciseModal = ({
   setEditData,
 }) => {
   const [errors, setErrors] = useState({});
+  const [showRepeats, setShowRepeats] = useState(true);
   const validate = (values) => {
     let error = {};
     if (values.series === 0) {
       error.series = "Field 'Series' is required!";
     }
-    if (values.repeats === 0) {
+
+    if (showRepeats === false) {
       error.repeats = "Field 'Repeats' can't be equal to 0!";
     }
     if (values.score === 0) {
@@ -34,6 +38,17 @@ const EditExcerciseModal = ({
       onEdit();
     }
     return error;
+  };
+
+  const setValueAfterSelect = (e) => {
+    const getValues = item.series.find(
+      (item) => item.serie === Number(e.target.value)
+    );
+    setEditData((prevState) => ({
+      ...prevState,
+      repeats: getValues.repeats,
+      score: getValues.score,
+    }));
   };
 
   const inputHandler = (e) => {
@@ -59,17 +74,19 @@ const EditExcerciseModal = ({
     });
   }, []);
   return (
-    <Wrapper onClick={onCancel}>
+    <Wrapper>
       <Container>
         <Title>{item.name}</Title>
         <Label>
-          <Text>
-            Series<sup>(You want to edit)</sup>
-          </Text>
+          <Text>Series</Text>
+          <Sup>(You want to edit)</Sup>
           <Select
             name="series"
             value={editData.series}
-            onChange={(e) => inputHandler(e)}
+            onChange={(e) => {
+              inputHandler(e);
+              setValueAfterSelect(e);
+            }}
           >
             <Option value="">choose...</Option>
             {item.series.map((item) => {
@@ -83,28 +100,32 @@ const EditExcerciseModal = ({
           {errors.series && <ErrorMsg>{errors.series}</ErrorMsg>}
         </Label>
         <Label>
-          <Text>
-            Repeats<sup>(You assume to do)</sup>
-          </Text>
-          <Input
-            name="repeats"
-            value={editData.repeats}
-            onChange={(e) => inputHandler(e)}
-          />
+          <Text>Repeats</Text>
+          <Sup>(You assume to do)</Sup>
+          <Row className="optional__repeats">
+            <Switch onChange={() => setShowRepeats(!showRepeats)} />
+            <Input
+              type="text"
+              disabled={showRepeats}
+              name="repeats"
+              value={editData.repeats}
+              onChange={(e) => inputHandler(e)}
+            />
+          </Row>
           {errors.repeats && <ErrorMsg>{errors.repeats}</ErrorMsg>}
         </Label>
         <Label>
-          <Text>
-            Score<sup>(You did)</sup>
-          </Text>
+          <Text>Score</Text>
+          <Sup>(You did)</Sup>
           <Input
+            type="text"
             name="score"
             value={editData.score}
             onChange={(e) => inputHandler(e)}
           />
           {errors.score && <ErrorMsg>{errors.score}</ErrorMsg>}
         </Label>
-        <Row className="buttons__wrapper">
+        <Row>
           <Button text="edytuj" fun={submitEdit} />
           <Button text="anuluj" style={"delete"} fun={onCancel} />
         </Row>
