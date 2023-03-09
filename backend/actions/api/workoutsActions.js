@@ -6,7 +6,7 @@ class WorkoutsActions {
     try {
       data = await Workout.find({});
     } catch (error) {
-      return res.status(200).send(error.message);
+      return res.status(400).send(error.message);
     }
     res.status(200).json(data);
   }
