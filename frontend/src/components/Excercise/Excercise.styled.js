@@ -91,4 +91,14 @@ export const Text = styled.div`
     color: #598b7a;
     font-weight: 600;
   }
+  .table__progress {
+    color: green;
+  }
+  .table__regress {
+    color: red;
+  }
+  .table__info {
+    margin-left: .5rem;
+    width: 7px;
+  }
 `;

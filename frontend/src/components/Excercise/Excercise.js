@@ -4,6 +4,8 @@ import {
   faEdit,
   faAngleDown,
   faAngleUp,
+  faArrowUp,
+  faArrowDown,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
@@ -44,6 +46,17 @@ const ExcerciseTable = ({ item, setOpenEditModal, setCurrentEdit }) => {
                 <Text className="table__content">
                   {serie.score}
                   {item.unit}
+                  {serie.score > serie.lastScore ? (
+                    <FontAwesomeIcon
+                      icon={faArrowUp}
+                      className="table__progress table__info"
+                    />
+                  ) : (
+                    <FontAwesomeIcon
+                      icon={faArrowDown}
+                      className="table__regress table__info"
+                    />
+                  )}
                 </Text>
               </Div>
             );

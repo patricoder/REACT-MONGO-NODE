@@ -15,7 +15,7 @@ const AvailableExercises = () => {
       });
       setExcersises(data.data);
     } catch (error) {
-      throw new Error(error);
+      // throw new Error(error);
     } finally {
       setLoading(false);
     }

@@ -90,6 +90,45 @@ class Axios {
         //   : NotificationManager.error(error.message);
       });
   }
+
+  async signIn(data, nav) {
+    
+    axios({
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      url: `${process.env.REACT_APP_DB}/login`,
+      data,
+    })
+      .then((res) => {
+        nav("/");
+      })
+      .catch((err) => {
+        console.log(err);
+        NotificationManager.error(err.response.data.message);
+      });
+  }
+
+  async signUp(data) {
+    let res;
+
+    try {
+      res = await axios({
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        url: `${process.env.REACT_APP_DB}/register`,
+        data,
+      });
+    } catch (err) {
+      console.log(err);
+      // NotificationManager.error(err.response.data.message);
+      return;
+    }
+    console.log(res);
+  }
 }
 
 export default new Axios();

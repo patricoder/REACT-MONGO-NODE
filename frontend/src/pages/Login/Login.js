@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.svg";
 
 import { Button, ErrorMsg } from "../../components";
@@ -13,11 +13,19 @@ import {
   Input,
   Image,
 } from "./Login.styled";
+import { NotificationContainer } from "react-notifications";
+import "react-notifications/lib/notifications.css";
+import Axios from "../../lib/axios";
 
 function Login() {
-  const initialValues = { email: "", password: "" };
+  const initialValues = { email: "test@test2.pl", password: "123456" };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
+  const navigate = useNavigate();
+
+  const singIn = () => {
+    Axios.signIn(formValues, navigate);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,8 +51,11 @@ function Login() {
     if (!values.password) {
       errors.password = "Password is required!";
     }
+
+    if (Object.keys(errors).length === 0) {
+      singIn();
+    }
     return errors;
-    console.log(errors);
   };
 
   return (
@@ -80,6 +91,7 @@ function Login() {
           </Link>
         </Text>
       </Container>
+      <NotificationContainer />
     </Wrapper>
   );
 }

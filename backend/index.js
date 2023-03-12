@@ -19,6 +19,8 @@ app.use(cors());
 //routes
 app.use("/api/", apiRouter);
 
+
+
 app.listen(3001, (req, res) => {
   console.log("Server is listening..." + "PORT: 3001");
 });

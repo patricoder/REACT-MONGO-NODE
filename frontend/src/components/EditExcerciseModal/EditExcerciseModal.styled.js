@@ -8,20 +8,21 @@ export const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 `;
 
 export const Container = styled.div`
+  margin: 10rem 1rem 0;
   border-radius: 0.5rem;
   padding: 3rem 2rem;
-  position: absolute;
   z-index: 1;
   background-color: #222126;
   color: black;
   width: 100%;
   max-width: 40rem;
-  translate: -50% 0;
-  top: 25%;
-  left: 50%;
+ 
   display: flex;
   flex-direction: column;
   .modal__icon {
@@ -61,7 +62,7 @@ export const Input = styled.input`
     -webkit-appearance: none;
   }
   &:disabled {
-    opacity: .6;
+    opacity: 0.6;
   }
 `;
 
@@ -76,7 +77,7 @@ export const Sup = styled.p`
   font-size: 1rem;
   color: #807f84;
   text-align: center;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 `;
 
 export const Select = styled.select`
@@ -95,7 +96,6 @@ export const Row = styled.div`
   display: flex;
   justify-content: center;
   gap: 1rem;
-
 `;
 
 export const Title = styled.p`

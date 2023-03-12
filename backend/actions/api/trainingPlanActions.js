@@ -67,7 +67,8 @@ class TrainingPlanActions {
   }
 
   async editWorkoutInPlan(req, res) {
-    const { excerciseId, serieId, repeats, score } = req.body;
+    const { excerciseId, serieId, repeats, score, lastScore } = req.body;
+    console.log(req.body);
     let data;
     try {
       data = await TrainingPlan.updateOne(
@@ -87,6 +88,7 @@ class TrainingPlanActions {
           $set: {
             "workouts.$[outer].series.$[inner].repeats": repeats,
             "workouts.$[outer].series.$[inner].score": score,
+            "workouts.$[outer].series.$[inner].lastScore": lastScore,
           },
         },
         {

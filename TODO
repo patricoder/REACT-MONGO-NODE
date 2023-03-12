@@ -1,10 +1,9 @@
 FRONTEND
--podpiąć backend do logowania i rejestracji
--Zrobić sprawdzanie progresu w postaci porówania wartości score z serii
+-podpiąć backend do rejestracji
 -do kreatora planu treningowego dodać możliwość wyboru ćwiczeń z bazy dostępnych ćwiczeń (do zrobienia) lub gdy nie ma interesującego nas ćwiczenia dodać je ręcznie jako input type text
 -do kreatora planu treningowego dodać dodatkowe pola, takie jak Typ treningu (kalistenika, ciężary), w modalu dodawania ćwiczenia do  bazy utworzyć radio buttony do przefiltrowania ćwiczeń na interesującą nas partię()
 
+
+
 BACKEND:
-- API EDYCJI PLANU DODAĆ POLA lastScore aby umożliwić porównywanie wartości
 - konfiguracja jwt token,
-- walidowanie użytkownika podczas logowania

@@ -28,8 +28,12 @@ const EditExcerciseModal = ({
       error.series = "Field 'Series' is required!";
     }
 
-    if (showRepeats === false) {
+    if (showRepeats === true && values.repeats === 0) {
       error.repeats = "Field 'Repeats' can't be equal to 0!";
+      console.log(showRepeats);
+    } else if (showRepeats === false && values.repeats === 0) {
+      error.repeats = "Field 'Repeats' can't be equal to 0!";
+      console.log(showRepeats);
     }
     if (values.score === 0) {
       error.score = "Field 'Score' can't be equal to 0!";
